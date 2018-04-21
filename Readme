@@ -1,0 +1,17 @@
+魔改BBR
+参考nanqinlang大佬魔改BBR的参数
+在最新内核4.16.0编译通过
+
+编译：
+直接make即可
+
+安装：
+chmod +x ./tcp_bbr_mod.ko
+cp -rf ./tcp_bbr_mod.ko /lib/modules/$(uname -r)/kernel/net/ipv4
+depmod -a
+modprobe tcp_bbr_mod
+在/etc/sysctl.conf中修改或者加入
+net.ipv4.tcp_congestion_control = bbr_mod
+net.core.default_qdisc = fq
+保存退出
+sysctl -p //使生效
